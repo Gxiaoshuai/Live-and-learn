@@ -1,12 +1,12 @@
 package util
 
 import (
-	"fmt"
+	"errors"
 	"github.com/astaxie/beego/context"
 )
 
 type ParamUtil struct{
-	Error string
+	Error error
 
 }
 /*
@@ -25,10 +25,21 @@ func (this *ParamUtil) GetParams (params map[string]map[string]string, ctx *cont
 		value = defaultVal
 		value = ctx.Input.Query(paramKey)
 		if value =="" && params[param]["required"] == "1"{
-			this.Error = fmt.Sprintf("%s参数必须传",paramName);
+			this.Error = errors.New(paramName+"参数必须传");
 			return result,false
 		}
 		result[param] = value
 	}
 	return result,true
 }
+///*
+//	传入参数 {"roleId":{"from":"roleId","required":"1","name":"技能组id","default":0,"type":"int8"},xxxx}
+//*/
+//func (this *ParamUtil) GetParamsInt(params map[string]map[string]interface{},ctx *context.Context)(map[string]string,bool){
+//	var result = make(map[string]interface{})
+//	if ctx.Request.Form == nil {
+//		ctx.Request.ParseForm()
+//	}
+//	var input = ctx.Request.Form
+//	input.
+//}
