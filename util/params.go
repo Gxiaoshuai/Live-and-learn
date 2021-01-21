@@ -21,11 +21,10 @@ func (this *ParamUtil) GetParams (params map[string]map[string]string, ctx *cont
 	for param := range params{
 		paramName = params[param]["name"]
 		paramKey = params[param]["from"]
-		defaultVal  = params[param]["detault"]
+		defaultVal  = params[param]["default"]
 		value = defaultVal
 		value = ctx.Input.Query(paramKey)
-		fmt.Println(value)
-		if value =="" && params[param]["requird"] == "1"{
+		if value =="" && params[param]["required"] == "1"{
 			this.Error = fmt.Sprintf("%s参数必须传",paramName);
 			return result,false
 		}
